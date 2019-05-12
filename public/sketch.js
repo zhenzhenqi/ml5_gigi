@@ -20,7 +20,7 @@ function setup() {
   // startBtn.mousePressed(generate);
 
   //speech setup
-  var canvas = createCanvas(windowWidth, 200);
+  var canvas = createCanvas(windowWidth, 100);
   canvas.parent("canvasContainer");
   background(255, 255, 255);
   fill(0, 0, 0, 255);
@@ -33,7 +33,7 @@ function setup() {
     myRec.start();
   }
   // foo.setVoice("Sara");
-  foo.setPitch(1.5);
+  foo.setPitch(2);
   foo.setVoice(2);
   foo.setRate(1);
   myRec = new p5.SpeechRec(); // new P5.SpeechRec object
