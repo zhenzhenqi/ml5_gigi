@@ -29,6 +29,9 @@ function setup() {
   textSize(20);
 
   foo = new p5.Speech(); // speech synthesis object
+  foo.onEnd = function (){
+    myRec.start();
+  }
   // foo.setVoice("Sara");
   foo.setPitch(1.5);
   foo.setVoice(2);
@@ -110,5 +113,6 @@ async function predict() {
     // startBtn.html('Start');
     period = 0;
     foo.speak(par.html());
+
   }
 }
