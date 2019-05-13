@@ -29,18 +29,19 @@ function setup() {
   textSize(20);
 
   foo = new p5.Speech(); // speech synthesis object
-  foo.onEnd = function (){
-    myRec.start();
-  }
+
   // foo.setVoice("Sara");
   foo.setPitch(2);
   foo.setVoice(2);
   foo.setRate(1);
   myRec = new p5.SpeechRec(); // new P5.SpeechRec object
-  myRec.continuous = false;
+  myRec.continuous = true;
+  myRec.onEnd = function (){
+    myRec.start();
+  }
 
   // textAlign(CENTER);
-  text("say something", 30, 30);
+  text("say something", 30, 100);
   myRec.onResult = showResult;
   // myRec.onEnd = myRec.start();
   myRec.start();
@@ -64,6 +65,7 @@ function updateSeed(){
   seed = myRec.resultString;
   // console.log("seed", seed);
   generate();
+  // myRec.continuous = false;
 }
 
 async function modelReady() {
@@ -78,6 +80,7 @@ function resetModel() {
   charRNN.feed(seed);
   // select('#result').html(seed);
   select('#result').html("");
+  // myRec.continuous = true;
 }
 
 function generate() {
@@ -103,7 +106,7 @@ async function predict() {
   // console.log(next.sample);
   // foo.speak(next.sample); // say something
 
-  if(next.sample=="."){
+  if(next.sample=="." ||next.sample=="?" ){
     period++;
     // console.log(period);
   }
@@ -113,6 +116,5 @@ async function predict() {
     // startBtn.html('Start');
     period = 0;
     foo.speak(par.html());
-
   }
 }
